@@ -1,15 +1,22 @@
 // eslint-disable-next-line require-jsdoc
-function fetchUserInfo(items) {
+function fetchUserInfo(searchId) {
   fetch(
-      `https://api.github.com/search/repositories?q=${items}+in:name,description&sort=stars&order=desc`
+      `https://api.github.com/search/repositories?q=${searchId}+in:name,description&sort=stars&order=desc`
   )
       .then((response) => {
         if (!response.ok) {
           console.error('サーバーエラー', response);
         } else {
-          return response.json().then((items) => {
+          return response.json().then((userInfo) => {
             const view = escapeHTML`
-            
+            <h4>${userInfo.items[0].full_name}</h4>
+            <img src="${userInfo.items[0].avatar_url}" alt="${userInfo.items[0].login}" height="100">
+            <dl>
+              <dt>スターの数</dt>
+              <dd>${userInfo.items[0].stargazers_count}</dd>
+              <dt>URL</dt>
+              <dd><a href="${userInfo.items[0].html_url}">${userInfo.items[0].html_url}</a></dd>
+            </dl>
             `;
             const result = document.getElementById('result');
             result.innerHTML = view;
