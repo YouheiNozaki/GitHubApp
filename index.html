@@ -8,16 +8,16 @@
 <body>
   <header> 
     <div class="header-container">
-      <h1 class="header-logo">GitHub Star Ranking</h1>
+      <h1 class="header-logo">GitHub Repository Ranking</h1>
     </div>
   </header>
   <main>
     <div class="main-container">
       <p class="maincopy">GitHubの人気リポジトリを読んで、勉強しよう！<br>気になるプログラミング言語を入力して、検索してみてください。</p>
-      <input id="search-wd" type="text" placeholder="検索ワードを入力してください"/>
-      <button onclick="main();">検索</button>
+      <input id="seachId" type="text" placeholder="検索ワードを入力してください"/>
+      <button onclick="fetchUserInfo('React');">検索</button>
 
-      <div id="main-block"></div>
+      <div id="result"></div>
     </div>
   </main>
    <footer>
@@ -25,5 +25,7 @@
        <p class="copyright">©Ryu-sou</p>
      </div>
   </footer>
+
+  <script src="src/index.js"></script>
 </body>
 </html>
