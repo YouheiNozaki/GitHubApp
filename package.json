@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "format": "prettier-eslint --write 'src/**/*.js'"
+  },
+  "devDependencies": {
+    "eslint-config-google": "^0.13.0",
+    "prettier-eslint": "^9.0.0",
+    "prettier-eslint-cli": "^5.0.0"
+  }
+}
