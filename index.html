@@ -2,16 +2,28 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GitHubAPIApp</title>
-  <link href="./styles.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-  <header>  
+  <header> 
+    <div class="header-container">
+      <h1 class="header-logo">GitHub Star Ranking</h1>
+    </div>
   </header>
   <main>
+    <div class="main-container">
+      <p class="maincopy">GitHubの人気リポジトリを読んで、勉強しよう！<br>気になるプログラミング言語を入力して、検索してみてください。</p>
+      <input id="search-wd" type="text" placeholder="検索ワードを入力してください"/>
+      <button onclick="main();">検索</button>
+
+      <div id="main-block"></div>
+    </div>
   </main>
    <footer>
+     <div class="footer-container">
+       <p class="copyright">©Ryu-sou</p>
+     </div>
   </footer>
 </body>
 </html>
