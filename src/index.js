@@ -2,8 +2,8 @@
 async function main() {
   try {
     const userId = getUserId();
-    const userInfo = await fetchUserInfo(userId);
-    const view = createView(userInfo);
+    const UserInfo = await fetchUserInfo(userId);
+    const view = createView(UserInfo);
     displayView(view);
   } catch (error) {
     console.error(`eエラーが発生しました(${error})`);
@@ -13,7 +13,7 @@ async function main() {
 // eslint-disable-next-line require-jsdoc
 function fetchUserInfo(userId) {
   return fetch(
-      `https://api.github.com/search/repositories?q=${userId}+in:name,description&sort=stars&order=desc`
+      `https://api.github.com/search/repositories?q=${userId}+in:name&sort=stars&order=desc`
   )
       .then((response) => {
         if (!response.ok) {
@@ -34,17 +34,16 @@ function getUserId() {
 }
 
 // eslint-disable-next-line require-jsdoc
-function createView(userInfo) {
+function createView(UserInfo) {
   return escapeHTML`
-  <h4>${userInfo.items[0].full_name}</h4>
-  <img src="${userInfo.items[0].owner.avatar_url}" 
-  alt="${userInfo.items[0].owner.login}" height="100">
+  <h4>${UserInfo.items[0].full_name}</h4>
+  <img src="${UserInfo.items[0].owner.avatar_url}" 
+  alt="${UserInfo.items[0].owner.login}" height="100">
   <dl>
-    <dt>☆☆☆</dt>
-    <dd>${userInfo.items[0].stargazers_count}</dd>
-    <dt>URL</dt>
-    <dd><a href="${userInfo.items[0].html_url}">
-    ${userInfo.items[0].html_url}</a></dd>
+    <dt>☆${UserInfo.items[0].stargazers_count}</dt>
+    <dt>URL <a href="${UserInfo.items[0].html_url}">
+    ${UserInfo.items[0].html_url}</a></dt>
+    <dt>${UserInfo.items[0].description}</dt>
   </dl>
   `;
 }
