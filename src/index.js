@@ -10,7 +10,7 @@ function fetchUserInfo(searchId) {
           return response.json().then((userInfo) => {
             const view = escapeHTML`
             <h4>${userInfo.items[0].full_name}</h4>
-            <img src="${userInfo.items[0].avatar_url}" alt="${userInfo.items[0].login}" height="100">
+            <img src="${userInfo.items[0].owner.avatar_url}" alt="${userInfo.items[0].owner.login}" height="100">
             <dl>
               <dt>スターの数</dt>
               <dd>${userInfo.items[0].stargazers_count}</dd>
@@ -27,6 +27,7 @@ function fetchUserInfo(searchId) {
         console.error('ネットワークエラー', error);
       });
 }
+
 
 function escapeSpecialChars(str) {
   return str
