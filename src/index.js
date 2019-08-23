@@ -1,10 +1,13 @@
+const result = document.getElementById('result');
+
 // eslint-disable-next-line require-jsdoc
 async function main() {
   try {
     const userId = getUserId();
-    const UserInfo = await fetchUserInfo(userId);
-    const view = createView(UserInfo);
-    displayView(view);
+    const userInfo = await fetchUserInfo(userId);
+    for (let i =0; i < 10; i++) {
+      createView(userInfo.items[i]);
+    }
   } catch (error) {
     console.error(`eエラーが発生しました(${error})`);
   }
@@ -34,25 +37,29 @@ function getUserId() {
 }
 
 // eslint-disable-next-line require-jsdoc
-function createView(UserInfo) {
-  return escapeHTML`
-  <h4>${UserInfo.items[0].full_name}</h4>
-  <img src="${UserInfo.items[0].owner.avatar_url}" 
-  alt="${UserInfo.items[0].owner.login}" height="100">
+function createView(userInfo) {
+  const node = document.createElement('div');
+  node.setAttribute('class', 'column');
+  const txt = escapeHTML`
+  <h4>${userInfo.full_name}</h4>
+  <img src="${userInfo.owner.avatar_url}" 
+  alt="${userInfo.owner.login}" height="100">
   <dl>
-    <dt>☆${UserInfo.items[0].stargazers_count}</dt>
-    <dt>URL <a href="${UserInfo.items[0].html_url}">
-    ${UserInfo.items[0].html_url}</a></dt>
-    <dt>${UserInfo.items[0].description}</dt>
+    <dt>☆${userInfo.stargazers_count}</dt>
+    <dt>URL <a href="${userInfo.html_url}">
+    ${userInfo.html_url}</a></dt>
+    <dt>${userInfo.description}</dt>
   </dl>
   `;
+  node.innerHTML = txt;
+  result.appendChild(node);
 }
 
 // eslint-disable-next-line require-jsdoc
-function displayView(view) {
-  const result = document.getElementById('result');
-  result.innerHTML = view;
-}
+// function displayView(view) {
+//   const result = document.getElementById('result');
+//   result.innerHTML = view;
+// }
 
 // eslint-disable-next-line require-jsdoc
 function escapeSpecialChars(str) {
