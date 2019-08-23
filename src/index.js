@@ -3,6 +3,7 @@ const result = document.getElementById('result');
 // eslint-disable-next-line require-jsdoc
 async function main() {
   try {
+    while (result.firstChild) result.removeChild(result.firstChild);
     const userId = getUserId();
     const userInfo = await fetchUserInfo(userId);
     for (let i =0; i < 10; i++) {
