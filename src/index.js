@@ -57,12 +57,6 @@ function createView(userInfo) {
 }
 
 // eslint-disable-next-line require-jsdoc
-// function displayView(view) {
-//   const result = document.getElementById('result');
-//   result.innerHTML = view;
-// }
-
-// eslint-disable-next-line require-jsdoc
 function escapeSpecialChars(str) {
   return str
       .replace(/&/g, '&amp;')
